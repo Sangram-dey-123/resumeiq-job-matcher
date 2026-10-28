@@ -14,9 +14,10 @@ st.set_page_config(
 # ---------- DESIGN ----------
 st.markdown("""
 <style>
+/* Main page */
 .stApp {
-    background: #f7f7f7 !important;
-    color: #222222 !important;
+    background: #f3f6fc !important;
+    color: #172033 !important;
 }
 
 .main .block-container {
@@ -25,141 +26,152 @@ st.markdown("""
     padding-bottom: 3rem;
 }
 
-.stApp h1, .stApp h2, .stApp h3,
-.stApp h4, .stApp p, .stApp li,
+/* Main page typography */
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp p,
+.stApp li,
 .stApp label {
-    color: #222222;
+    color: #172033;
 }
 
+/* Sidebar */
 [data-testid="stSidebar"] {
-    background: #eeeeee !important;
-    border-right: 1px solid #dddddd !important;
+    background: #e8effb !important;
 }
 
 [data-testid="stSidebar"] * {
-    color: #222222 !important;
+    color: #172033 !important;
 }
 
+[data-testid="stSidebar"] hr {
+    border-color: #c5d2e6 !important;
+}
+
+/* Header banner */
 .hero {
     padding: 28px;
-    border-radius: 16px;
-    background: #292929 !important;
+    border-radius: 20px;
+    background: linear-gradient(120deg, #14213d, #2457a7);
     color: #ffffff !important;
     margin-bottom: 24px;
 }
 
-.hero h1, .hero p {
+.hero h1 {
     color: #ffffff !important;
+    margin-bottom: 8px;
 }
 
 .hero p {
+    color: #ffffff !important;
     font-size: 17px;
 }
 
-/* Inputs */
+/* Input labels */
 [data-testid="stFileUploader"] label,
 [data-testid="stTextInput"] label,
 [data-testid="stTextArea"] label {
-    color: #222222 !important;
+    color: #172033 !important;
     font-weight: 600 !important;
 }
 
+/* Text input and job description */
 [data-testid="stTextInput"] input,
 [data-testid="stTextArea"] textarea {
     background: #ffffff !important;
-    color: #222222 !important;
-    -webkit-text-fill-color: #222222 !important;
-    border: 1px solid #bdbdbd !important;
-    border-radius: 8px !important;
-    box-shadow: none !important;
+    color: #172033 !important;
+    border: 1px solid #aebed4 !important;
+    border-radius: 9px !important;
+    -webkit-text-fill-color: #172033 !important;
 }
 
 [data-testid="stTextInput"] input::placeholder,
 [data-testid="stTextArea"] textarea::placeholder {
-    color: #666666 !important;
-    -webkit-text-fill-color: #666666 !important;
+    color: #64748b !important;
+    -webkit-text-fill-color: #64748b !important;
     opacity: 1 !important;
 }
 
-/* Upload area */
+/* File uploader container */
 [data-testid="stFileUploader"] section {
     background: #ffffff !important;
-    border: 1px dashed #999999 !important;
-    border-radius: 10px !important;
+    border: 1px dashed #94a9c7 !important;
 }
 
-[data-testid="stFileUploader"] section,
+/* Keep all file uploader text readable */
 [data-testid="stFileUploader"] section * {
-    color: #222222 !important;
+    color: #172033 !important;
 }
 
-/* Upload button: black text on white */
+/* Upload button remains visible without hovering */
 [data-testid="stFileUploader"] button {
     background: #ffffff !important;
-    color: #222222 !important;
-    -webkit-text-fill-color: #222222 !important;
-    border: 1px solid #777777 !important;
+    color: #17345f !important;
+    border: 1px solid #8ba6cc !important;
     border-radius: 8px !important;
     opacity: 1 !important;
     box-shadow: none !important;
 }
 
+[data-testid="stFileUploader"] button,
 [data-testid="stFileUploader"] button * {
-    color: #222222 !important;
-    -webkit-text-fill-color: #222222 !important;
-    fill: #222222 !important;
-    opacity: 1 !important;
+    color: #17345f !important;
+    fill: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
 }
 
 [data-testid="stFileUploader"] button:hover,
-[data-testid="stFileUploader"] button:focus,
-[data-testid="stFileUploader"] button:focus-visible,
-[data-testid="stFileUploader"] button:active {
-    background: #eeeeee !important;
-    color: #111111 !important;
-    -webkit-text-fill-color: #111111 !important;
-    border-color: #333333 !important;
-    box-shadow: none !important;
+[data-testid="stFileUploader"] button:focus-visible {
+    background: #dce9ff !important;
+    color: #17345f !important;
+    border-color: #2563eb !important;
+}
+
+[data-testid="stFileUploader"] button:disabled {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
     opacity: 1 !important;
 }
 
 /* Metric cards */
 .metric-card {
     background: #ffffff;
-    border: 1px solid #dddddd;
+    border: 1px solid #d6e2f3;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: center;
 }
 
 .metric-value {
     font-size: 30px;
     font-weight: 750;
-    color: #222222 !important;
+    color: #1d4ed8 !important;
 }
 
 .metric-label {
-    color: #555555 !important;
+    color: #475569 !important;
 }
 
 /* Matching skills */
 .skill-match {
-    background: #eeeeee;
-    color: #222222 !important;
-    border-left: 5px solid #555555;
+    background: #dcfce7;
+    color: #166534 !important;
+    border-left: 5px solid #16a34a;
     padding: 13px 16px;
-    border-radius: 8px;
+    border-radius: 9px;
     margin: 8px 0;
     font-weight: 600;
 }
 
 /* Potential skill gaps */
 .skill-gap {
-    background: #f3f3f3;
-    color: #222222 !important;
-    border-left: 5px solid #888888;
+    background: #fee2e2;
+    color: #991b1b !important;
+    border-left: 5px solid #dc2626;
     padding: 13px 16px;
-    border-radius: 8px;
+    border-radius: 9px;
     margin: 8px 0;
     font-weight: 600;
 }
@@ -167,69 +179,56 @@ st.markdown("""
 /* Information cards */
 .section-card {
     background: #ffffff;
-    color: #222222 !important;
+    color: #172033 !important;
     padding: 20px;
-    border: 1px solid #dddddd;
-    border-radius: 12px;
+    border: 1px solid #d6e2f3;
+    border-radius: 15px;
     margin-bottom: 14px;
 }
 
 .section-card h3,
 .section-card p {
-    color: #222222 !important;
+    color: #172033 !important;
 }
 
 .small-note {
-    color: #555555 !important;
+    color: #475569 !important;
     font-size: 13px;
 }
 
-/* Analyse button: white text on black */
+/* Primary buttons */
 .stButton button[kind="primary"] {
-    background: #222222 !important;
+    background: #2563eb !important;
+    border: 1px solid #2563eb !important;
+    border-radius: 9px !important;
     color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-    border: 1px solid #222222 !important;
-    border-radius: 8px !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
 }
 
 .stButton button[kind="primary"] * {
     color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-    fill: #ffffff !important;
 }
 
-.stButton button[kind="primary"]:hover,
-.stButton button[kind="primary"]:focus,
-.stButton button[kind="primary"]:focus-visible,
-.stButton button[kind="primary"]:active {
-    background: #444444 !important;
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-    border-color: #444444 !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-}
-
-/* Download button: black text on white */
+/* DOWNLOAD REPORT BUTTON - READABLE IN ALL STATES */
 [data-testid="stDownloadButton"] button,
 .stDownloadButton button {
-    background: #ffffff !important;
-    color: #222222 !important;
-    -webkit-text-fill-color: #222222 !important;
-    border: 1px solid #777777 !important;
-    border-radius: 8px !important;
-    box-shadow: none !important;
+    background: #e8effb !important;
+    color: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
+    border: 1px solid #8ba6cc !important;
+    border-radius: 9px !important;
     opacity: 1 !important;
+    box-shadow: none !important;
+    transition: background-color 0.15s ease,
+                border-color 0.15s ease !important;
 }
 
 [data-testid="stDownloadButton"] button *,
-.stDownloadButton button * {
-    color: #222222 !important;
-    -webkit-text-fill-color: #222222 !important;
-    fill: #222222 !important;
+.stDownloadButton button *,
+[data-testid="stDownloadButton"] button svg,
+.stDownloadButton button svg {
+    color: #17345f !important;
+    fill: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
     opacity: 1 !important;
 }
 
@@ -241,39 +240,32 @@ st.markdown("""
 .stDownloadButton button:focus,
 .stDownloadButton button:focus-visible,
 .stDownloadButton button:active {
-    background: #eeeeee !important;
-    color: #111111 !important;
-    -webkit-text-fill-color: #111111 !important;
-    border-color: #333333 !important;
-    box-shadow: none !important;
+    background: #d3e3ff !important;
+    color: #102a50 !important;
+    -webkit-text-fill-color: #102a50 !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18) !important;
     opacity: 1 !important;
 }
 
 [data-testid="stDownloadButton"] button:hover *,
 [data-testid="stDownloadButton"] button:focus *,
+[data-testid="stDownloadButton"] button:focus-visible *,
 [data-testid="stDownloadButton"] button:active *,
 .stDownloadButton button:hover *,
 .stDownloadButton button:focus *,
+.stDownloadButton button:focus-visible *,
 .stDownloadButton button:active * {
-    color: #111111 !important;
-    -webkit-text-fill-color: #111111 !important;
-    fill: #111111 !important;
+    color: #102a50 !important;
+    fill: #102a50 !important;
+    -webkit-text-fill-color: #102a50 !important;
     opacity: 1 !important;
 }
 
-/* Tables */
+/* Data tables */
 [data-testid="stDataFrame"] {
     background: #ffffff;
     border-radius: 10px;
-}
-
-/* Neutral progress bars */
-[data-testid="stProgressBar"] > div {
-    background: #dddddd !important;
-}
-
-[data-testid="stProgressBar"] > div > div {
-    background: #555555 !important;
 }
 
 /* Mobile layout */
@@ -328,6 +320,7 @@ SKILL_LIBRARY = {
 
 # ---------- TEXT PROCESSING ----------
 def normalize(text):
+    """Normalize text while preserving useful technical terms."""
     text = text.lower()
     text = text.replace("c++", "cplusplus")
     text = text.replace("c#", "csharp")
@@ -336,6 +329,7 @@ def normalize(text):
 
 
 def extract_pdf(uploaded_file):
+    """Extract text from an uploaded PDF."""
     document = fitz.open(
         stream=uploaded_file.getvalue(),
         filetype="pdf"
@@ -349,6 +343,7 @@ def extract_pdf(uploaded_file):
 
 
 def detect_skills(text):
+    """Identify skills from the predefined skill library."""
     normalized = normalize(text)
     found = {}
 
@@ -369,6 +364,7 @@ def detect_skills(text):
 
 
 def find_keywords(text, limit=12):
+    """Find frequent words that may be relevant to the job."""
     stop_words = set("""
         the and for with that this from have has will are was were our
         you your they their them about into using use used required
@@ -404,10 +400,12 @@ def analyse_resume(resume_text, job_text):
     matched = sorted(resume_set & job_set)
     missing = sorted(job_set - resume_set)
 
-    skill_score = (
-        round(100 * len(matched) / len(job_set))
-        if job_set else 0
-    )
+    if job_set:
+        skill_score = round(
+            100 * len(matched) / len(job_set)
+        )
+    else:
+        skill_score = 0
 
     resume_words = set(normalize(resume_text).split())
     keywords = find_keywords(job_text, 15)
@@ -417,11 +415,14 @@ def analyse_resume(resume_text, job_text):
         if word in resume_words
     ]
 
-    keyword_score = (
-        round(100 * len(keyword_matches) / len(keywords))
-        if keywords else 0
-    )
+    if keywords:
+        keyword_score = round(
+            100 * len(keyword_matches) / len(keywords)
+        )
+    else:
+        keyword_score = 0
 
+    # Heuristic estimate, not an official ATS score.
     overall_score = round(
         0.8 * skill_score + 0.2 * keyword_score
     )
@@ -647,7 +648,7 @@ if "results" in st.session_state:
     )
     st.progress(results["keyword_score"] / 100)
 
-    # Matching skills and skill gaps
+    # ---------- MATCHING SKILLS AND SKILL GAPS ----------
     col1, col2 = st.columns(2)
 
     with col1:
@@ -676,7 +677,7 @@ if "results" in st.session_state:
                 "No gaps detected in the recognised skill list."
             )
 
-    # Skill comparison table
+    # ---------- SKILL COMPARISON TABLE ----------
     st.markdown("### 🧩 Skill comparison table")
 
     all_skills = sorted(
@@ -724,7 +725,7 @@ if "results" in st.session_state:
             "Try a more detailed job description."
         )
 
-    # Improvement suggestions
+    # ---------- IMPROVEMENT SUGGESTIONS ----------
     st.markdown("### 💡 Improvement suggestions")
 
     if results["missing"]:
@@ -750,7 +751,7 @@ if "results" in st.session_state:
         st.markdown("### 🔑 Job description keywords")
         st.write(", ".join(results["keywords"]))
 
-    # Download report
+    # ---------- DOWNLOAD REPORT ----------
     st.markdown("### 📥 Download your report")
 
     st.download_button(
