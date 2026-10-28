@@ -401,28 +401,28 @@ if "results" in st.session_state:
     st.write(f"**Keyword overlap:** {results['keyword_score']}%")
     st.progress(results["keyword_score"] / 100)
 
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
     with col1:
-    st.markdown("### ✅ Matching skills")
-    if results["matched"]:
+        st.markdown("### ✅ Matching skills")
+        if results["matched"]:
         for skill in results["matched"]:
-            st.markdown(
-                f'<div class="skill-match">✓ {skill.title()}</div>',
-                unsafe_allow_html=True
-            )
-    else:
+        st.markdown(
+        f'<div class="skill-match">✓ {skill.title()}</div>',
+        unsafe_allow_html=True
+        )
+        else:
         st.info("No matching skills were recognised.")
 
     with col2:
-    st.markdown("### 📌 Potential skill gaps")
-    if results["missing"]:
+        st.markdown("### 📌 Potential skill gaps")
+        if results["missing"]:
         for skill in results["missing"]:
-            st.markdown(
-                f'<div class="skill-gap">! {skill.title()}</div>',
-                unsafe_allow_html=True
-            )
-    else:
+        st.markdown(
+        f'<div class="skill-gap">! {skill.title()}</div>',
+        unsafe_allow_html=True
+        )
+        else:
         st.success("No gaps detected in the recognised skill list.")
 
     st.markdown("### 🧩 Skill comparison table")
