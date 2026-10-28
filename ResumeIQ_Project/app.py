@@ -16,38 +16,25 @@ st.set_page_config(
 st.markdown("""
 <style>
 .stApp {
-    background: #f3f6fc !important;
+    background: linear-gradient(135deg, #f4f7ff 0%, #edf4ff 100%);
     color: #172033 !important;
 }
 
 .main .block-container {
-    max-width: 1200px;
+    max-width: 1150px;
     padding-top: 2rem;
     padding-bottom: 3rem;
 }
 
-/* Main page text */
-.stApp h1,
-.stApp h2,
-.stApp h3,
-.stApp h4,
-.stApp p,
-.stApp li,
-.stApp label {
-    color: #172033;
-}
-
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background: #e8effb !important;
-}
-
-[data-testid="stSidebar"] * {
+/* Readable headings and text */
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3,
+.stMarkdown h4,
+.stMarkdown p,
+.stMarkdown li,
+.stMarkdown label {
     color: #172033 !important;
-}
-
-[data-testid="stSidebar"] hr {
-    border-color: #c5d2e6 !important;
 }
 
 /* Header banner */
@@ -65,77 +52,11 @@ st.markdown("""
 }
 
 .hero p {
-    color: #ffffff !important;
+    color: #edf3ff !important;
     font-size: 17px;
 }
 
-/* Input labels */
-[data-testid="stFileUploader"] label,
-[data-testid="stTextInput"] label,
-[data-testid="stTextArea"] label {
-    color: #172033 !important;
-    font-weight: 600 !important;
-}
-
-/* Text input and job description */
-[data-testid="stTextInput"] input,
-[data-testid="stTextArea"] textarea {
-    background: #ffffff !important;
-    color: #172033 !important;
-    border: 1px solid #aebed4 !important;
-    border-radius: 9px !important;
-    -webkit-text-fill-color: #172033 !important;
-}
-
-[data-testid="stTextInput"] input::placeholder,
-[data-testid="stTextArea"] textarea::placeholder {
-    color: #64748b !important;
-    -webkit-text-fill-color: #64748b !important;
-    opacity: 1 !important;
-}
-
-/* File uploader container */
-[data-testid="stFileUploader"] section {
-    background: #ffffff !important;
-    border: 1px dashed #94a9c7 !important;
-}
-
-/* Keep uploader text readable */
-[data-testid="stFileUploader"] section * {
-    color: #172033 !important;
-}
-
-/* FIX: Upload button always visible */
-[data-testid="stFileUploader"] button {
-    background: #ffffff !important;
-    color: #17345f !important;
-    border: 1px solid #8ba6cc !important;
-    border-radius: 8px !important;
-    opacity: 1 !important;
-    box-shadow: none !important;
-}
-
-[data-testid="stFileUploader"] button,
-[data-testid="stFileUploader"] button * {
-    color: #17345f !important;
-    fill: #17345f !important;
-    -webkit-text-fill-color: #17345f !important;
-}
-
-[data-testid="stFileUploader"] button:hover,
-[data-testid="stFileUploader"] button:focus-visible {
-    background: #dce9ff !important;
-    color: #17345f !important;
-    border-color: #2563eb !important;
-}
-
-[data-testid="stFileUploader"] button:disabled {
-    background: #f1f5f9 !important;
-    color: #475569 !important;
-    opacity: 1 !important;
-}
-
-/* Metric cards */
+/* Dashboard metric cards */
 .metric-card {
     background: #ffffff;
     border: 1px solid #d6e2f3;
@@ -186,43 +107,58 @@ st.markdown("""
     margin-bottom: 14px;
 }
 
-.section-card h3,
-.section-card p {
-    color: #172033 !important;
-}
-
 .small-note {
     color: #475569 !important;
     font-size: 13px;
 }
 
-/* Primary buttons */
-.stButton button[kind="primary"] {
-    background: #2563eb !important;
-    border: 1px solid #2563eb !important;
-    border-radius: 9px !important;
-    color: #ffffff !important;
+/* ---------- DOWNLOAD BUTTON FIX ---------- */
+/* Keep the report download button visible in every state */
+[data-testid="stDownloadButton"] button {
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+    border: 1px solid #2563EB !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+    transition: background-color 0.2s ease-in-out !important;
 }
 
-.stButton button[kind="primary"] * {
-    color: #ffffff !important;
+/* Ensure button text and icon stay white */
+[data-testid="stDownloadButton"] button,
+[data-testid="stDownloadButton"] button p,
+[data-testid="stDownloadButton"] button span,
+[data-testid="stDownloadButton"] button svg {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
 }
 
-/* Data tables */
-[data-testid="stDataFrame"] {
-    background: #ffffff;
-    border-radius: 10px;
+/* Hover state */
+[data-testid="stDownloadButton"] button:hover {
+    background-color: #1D4ED8 !important;
+    color: #FFFFFF !important;
+    border-color: #1D4ED8 !important;
 }
 
-/* Mobile layout */
-@media (max-width: 768px) {
-    .main .block-container {
-        padding: 1rem;
-    }
+/* Keyboard focus and click/active state */
+[data-testid="stDownloadButton"] button:focus,
+[data-testid="stDownloadButton"] button:focus-visible,
+[data-testid="stDownloadButton"] button:active {
+    background-color: #1E40AF !important;
+    color: #FFFFFF !important;
+    border-color: #1E40AF !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
+}
 
-    .hero {
-        padding: 20px;
-    }
+/* Keep nested text white in all interactive states */
+[data-testid="stDownloadButton"] button:hover p,
+[data-testid="stDownloadButton"] button:focus p,
+[data-testid="stDownloadButton"] button:active p,
+[data-testid="stDownloadButton"] button:hover span,
+[data-testid="stDownloadButton"] button:focus span,
+[data-testid="stDownloadButton"] button:active span {
+    color: #FFFFFF !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -276,41 +212,42 @@ def normalize(text):
 
 def extract_pdf(uploaded_file):
     """Extract text from an uploaded PDF."""
-    document = fitz.open(
-        stream=uploaded_file.getvalue(),
-        filetype="pdf"
-    )
+    data = uploaded_file.getvalue()
+    document = fitz.open(stream=data, filetype="pdf")
 
     try:
         pages = [page.get_text() for page in document]
-        return "\n".join(pages).strip()
     finally:
         document.close()
 
+    return "\n".join(pages).strip()
+
 
 def detect_skills(text):
-    """Identify skills from the predefined skill library."""
+    """Detect skills from the predefined skill library."""
     normalized = normalize(text)
-    found = {}
+    found = []
 
     for category, skills in SKILL_LIBRARY.items():
         for skill in skills:
             term = normalize(skill)
 
-            pattern = (
-                r"(?<![a-z0-9])"
-                + re.escape(term)
-                + r"(?![a-z0-9])"
-            )
+            if re.search(
+                r"(?<![a-z0-9])" + re.escape(term) + r"(?![a-z0-9])",
+                normalized
+            ):
+                found.append((skill, category))
 
-            if re.search(pattern, normalized):
-                found[skill] = category
+    unique = {}
 
-    return found
+    for skill, category in found:
+        unique[skill] = category
+
+    return unique
 
 
 def find_keywords(text, limit=12):
-    """Find frequent words that may be relevant to the job."""
+    """Find frequent non-generic words as additional job keywords."""
     stop_words = set("""
         the and for with that this from have has will are was were our
         you your they their them about into using use used required
@@ -319,7 +256,6 @@ def find_keywords(text, limit=12):
         must should would can may all any per etc who what when where
         job description position looking ideal across within support
         including such ensure develop developing build building
-        years year knowledge
     """.split())
 
     words = re.findall(
@@ -347,14 +283,17 @@ def analyse_resume(resume_text, job_text):
     missing = sorted(job_set - resume_set)
 
     if job_set:
-        skill_score = round(
-            100 * len(matched) / len(job_set)
-        )
+        skill_score = round(100 * len(matched) / len(job_set))
     else:
         skill_score = 0
 
+    # Additional keyword overlap
     resume_words = set(normalize(resume_text).split())
-    keywords = find_keywords(job_text, 15)
+
+    keywords = [
+        word for word in find_keywords(job_text, 15)
+        if word not in {"years", "year", "knowledge"}
+    ]
 
     keyword_matches = [
         word for word in keywords
@@ -368,7 +307,7 @@ def analyse_resume(resume_text, job_text):
     else:
         keyword_score = 0
 
-    # Heuristic estimate, not an official ATS score.
+    # Transparent heuristic, not a real ATS score
     overall_score = round(
         0.8 * skill_score + 0.2 * keyword_score
     )
@@ -386,7 +325,7 @@ def analyse_resume(resume_text, job_text):
     }
 
 
-# ---------- REPORT ----------
+# ---------- REPORT GENERATION ----------
 def make_report(results, job_title):
     lines = [
         "RESUMEIQ — RESUME AND JOB MATCH REPORT",
@@ -400,25 +339,25 @@ def make_report(results, job_title):
         "",
         "MATCHING SKILLS",
         *(
-            [f"- {skill}" for skill in results["matched"]]
+            [f"- {x}" for x in results["matched"]]
             or ["- None detected"]
         ),
         "",
         "SKILLS TO CONSIDER DEVELOPING",
         *(
-            [f"- {skill}" for skill in results["missing"]]
+            [f"- {x}" for x in results["missing"]]
             or ["- No missing listed skills detected"]
         ),
         "",
         "SUGGESTED JOB KEYWORDS",
         *(
-            [f"- {word}" for word in results["keywords"]]
+            [f"- {x}" for x in results["keywords"]]
             or ["- None detected"]
         ),
         "",
         "IMPORTANT DISCLAIMER",
-        "This report uses rule-based text and skill matching.",
-        "It is not a genuine ATS score or hiring prediction.",
+        "This report uses rule-based text and skill matching. It is not",
+        "a genuine ATS score, hiring prediction, or guarantee of selection.",
         "Review every suggestion and include only truthful qualifications."
     ]
 
@@ -448,9 +387,10 @@ with st.sidebar:
     st.write("4. Download your report.")
 
     st.markdown("---")
+
     st.caption(
-        "Your resume is processed in this app session. "
-        "Avoid uploading sensitive information you do not need to analyse."
+        "Your resume is processed in this app session. Avoid uploading "
+        "sensitive information you do not need to analyse."
     )
 
 
@@ -463,10 +403,7 @@ with left:
     uploaded_file = st.file_uploader(
         "Upload your resume (PDF)",
         type=["pdf"],
-        help=(
-            "Text-based PDFs work best. "
-            "Scanned image-only PDFs may need OCR."
-        )
+        help="Text-based PDFs work best. Scanned image-only PDFs may need OCR."
     )
 
     job_title = st.text_input(
@@ -479,8 +416,8 @@ with right:
         "Paste the full job description",
         height=190,
         placeholder=(
-            "Paste the responsibilities, qualifications "
-            "and required skills here..."
+            "Paste the responsibilities, qualifications and required "
+            "skills here..."
         )
     )
 
@@ -491,7 +428,7 @@ analyse_button = st.button(
 )
 
 
-# ---------- ANALYSIS ACTION ----------
+# ---------- RUN ANALYSIS ----------
 if analyse_button:
     if uploaded_file is None:
         st.error("Please upload a PDF resume first.")
@@ -501,16 +438,13 @@ if analyse_button:
 
     else:
         try:
-            with st.spinner(
-                "Extracting text and comparing skills..."
-            ):
+            with st.spinner("Extracting text and comparing skills..."):
                 resume_text = extract_pdf(uploaded_file)
 
                 if len(resume_text) < 30:
                     st.error(
-                        "Very little text was extracted. "
-                        "This may be a scanned PDF. Try a text-based PDF "
-                        "or run OCR first."
+                        "Very little text was extracted. This may be a "
+                        "scanned PDF. Try a text-based PDF or run OCR first."
                     )
                     st.stop()
 
@@ -528,8 +462,8 @@ if analyse_button:
 
         except Exception as error:
             st.error(
-                "The PDF could not be processed. "
-                "Please try another text-based PDF."
+                "The PDF could not be processed. Please try another "
+                "text-based PDF."
             )
             st.caption(f"Technical detail: {error}")
 
@@ -546,9 +480,7 @@ if "results" in st.session_state:
     with c1:
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-value">
-                {results['overall_score']}%
-            </div>
+            <div class="metric-value">{results['overall_score']}%</div>
             <div class="metric-label">Estimated match</div>
         </div>
         """, unsafe_allow_html=True)
@@ -556,9 +488,7 @@ if "results" in st.session_state:
     with c2:
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-value">
-                {len(results['matched'])}
-            </div>
+            <div class="metric-value">{len(results['matched'])}</div>
             <div class="metric-label">Matching skills</div>
         </div>
         """, unsafe_allow_html=True)
@@ -566,9 +496,7 @@ if "results" in st.session_state:
     with c3:
         st.markdown(f"""
         <div class="metric-card">
-            <div class="metric-value">
-                {len(results['missing'])}
-            </div>
+            <div class="metric-value">{len(results['missing'])}</div>
             <div class="metric-label">Potential skill gaps</div>
         </div>
         """, unsafe_allow_html=True)
@@ -576,16 +504,15 @@ if "results" in st.session_state:
     st.progress(results["overall_score"] / 100)
 
     st.info(
-        "The estimated match is a rule-based comparison, "
-        "not an official ATS score. It measures the skills and "
-        "keywords this prototype can recognise."
+        "The estimated match is a rule-based comparison, not an official "
+        "ATS score. It measures the skills and keywords this prototype "
+        "can recognise."
     )
 
+    # Skill coverage
     st.markdown("### Skill coverage")
-
     st.write(
-        f"**Recognised skill coverage:** "
-        f"{results['skill_score']}%"
+        f"**Recognised skill coverage:** {results['skill_score']}%"
     )
     st.progress(results["skill_score"] / 100)
 
@@ -594,7 +521,7 @@ if "results" in st.session_state:
     )
     st.progress(results["keyword_score"] / 100)
 
-    # ---------- MATCHING SKILLS AND SKILL GAPS ----------
+    # Matching skills and potential gaps
     col1, col2 = st.columns(2)
 
     with col1:
@@ -623,12 +550,12 @@ if "results" in st.session_state:
                 "No gaps detected in the recognised skill list."
             )
 
-    # ---------- SKILL COMPARISON TABLE ----------
+    # Skill comparison table
     st.markdown("### 🧩 Skill comparison table")
 
     all_skills = sorted(
-        set(results["job_skills"])
-        | set(results["resume_skills"])
+        set(results["job_skills"]) |
+        set(results["resume_skills"])
     )
 
     if all_skills:
@@ -642,20 +569,14 @@ if "results" in st.session_state:
                     results["resume_skills"].get(skill, "Other")
                 ),
                 "In resume": (
-                    "Yes"
-                    if skill in results["resume_skills"]
-                    else "No"
+                    "Yes" if skill in results["resume_skills"] else "No"
                 ),
                 "In job description": (
-                    "Yes"
-                    if skill in results["job_skills"]
-                    else "No"
+                    "Yes" if skill in results["job_skills"] else "No"
                 ),
                 "Status": (
-                    "Match"
-                    if skill in results["matched"]
-                    else "Potential gap"
-                    if skill in results["missing"]
+                    "Match" if skill in results["matched"]
+                    else "Potential gap" if skill in results["missing"]
                     else "Resume-only skill"
                 )
             })
@@ -665,34 +586,36 @@ if "results" in st.session_state:
             use_container_width=True,
             hide_index=True
         )
+
     else:
         st.write(
-            "No recognised skills found. "
-            "Try a more detailed job description."
+            "No recognised skills found. Try a more detailed job description."
         )
 
-    # ---------- IMPROVEMENT SUGGESTIONS ----------
+    # Improvement suggestions
     st.markdown("### 💡 Improvement suggestions")
 
     if results["missing"]:
         st.write(
-            "Review these skills and learn or practise the ones "
-            "that are genuinely relevant to your career goals:"
+            "Review these skills and learn or practise the ones that are "
+            "genuinely relevant to your career goals:"
         )
+
         st.write(", ".join(results["missing"]))
 
         st.write(
-            "If you already have one of these skills, consider "
-            "making your relevant experience easier to find in "
-            "your resume. Do not add skills you do not have."
-        )
-    else:
-        st.write(
-            "Check whether your resume provides clear evidence "
-            "of the relevant skills through projects, experience, "
-            "or achievements."
+            "If you already have one of these skills, consider making your "
+            "relevant experience easier to find in your resume. "
+            "Do not add skills you do not have."
         )
 
+    else:
+        st.write(
+            "Check whether your resume provides clear evidence of the "
+            "relevant skills through projects, experience, or achievements."
+        )
+
+    # Job description keywords
     if results["keywords"]:
         st.markdown("### 🔑 Job description keywords")
         st.write(", ".join(results["keywords"]))
@@ -709,10 +632,11 @@ if "results" in st.session_state:
     )
 
     st.markdown("---")
+
     st.caption(
-        "Privacy note: this prototype does not intentionally save "
-        "resumes to a database. The hosting environment may still "
-        "process session data. Use a test resume when demonstrating."
+        "Privacy note: this prototype does not intentionally save resumes "
+        "to a database. The hosting environment may still process session "
+        "data. Use a test resume when demonstrating."
     )
 
 else:
@@ -727,10 +651,9 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-
-# ---------- FOOTER ----------
 st.markdown("---")
+
 st.caption(
-    "ResumeIQ · Educational prototype · "
-    "Match scores are estimates, not hiring predictions."
+    "ResumeIQ · Educational prototype · Match scores are estimates, "
+    "not hiring predictions."
 )
