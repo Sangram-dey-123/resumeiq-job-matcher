@@ -94,17 +94,28 @@ st.markdown("""
     opacity: 1 !important;
 }
 
-/* File uploader */
+/* ==================================================
+   FILE UPLOADER - FIXED VISIBILITY
+   ================================================== */
+
+/* Upload dropzone */
 [data-testid="stFileUploader"] section {
     background: #ffffff !important;
     border: 1px dashed #94a9c7 !important;
+    border-radius: 10px !important;
 }
 
-[data-testid="stFileUploader"] section * {
-    color: #172033 !important;
+/* Upload area text */
+[data-testid="stFileUploader"] section,
+[data-testid="stFileUploader"] section p,
+[data-testid="stFileUploader"] section span,
+[data-testid="stFileUploader"] section small,
+[data-testid="stFileUploader"] section div {
+    color: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
 }
 
-/* Upload button: readable without hovering */
+/* Upload button: visible even before hover */
 [data-testid="stFileUploader"] button {
     background: #ffffff !important;
     color: #17345f !important;
@@ -112,15 +123,20 @@ st.markdown("""
     border-radius: 8px !important;
     opacity: 1 !important;
     box-shadow: none !important;
+    transition: background-color 0.15s ease,
+                border-color 0.15s ease !important;
 }
 
 [data-testid="stFileUploader"] button,
-[data-testid="stFileUploader"] button * {
+[data-testid="stFileUploader"] button *,
+[data-testid="stFileUploader"] button svg {
     color: #17345f !important;
     fill: #17345f !important;
     -webkit-text-fill-color: #17345f !important;
+    opacity: 1 !important;
 }
 
+/* Upload button hover, focus and click */
 [data-testid="stFileUploader"] button:hover,
 [data-testid="stFileUploader"] button:focus,
 [data-testid="stFileUploader"] button:focus-visible,
@@ -128,15 +144,76 @@ st.markdown("""
     background: #dce9ff !important;
     color: #17345f !important;
     border-color: #2563eb !important;
+    outline-color: #2563eb !important;
 }
 
-[data-testid="stFileUploader"] button:disabled {
-    background: #f1f5f9 !important;
-    color: #475569 !important;
+[data-testid="stFileUploader"] button:hover *,
+[data-testid="stFileUploader"] button:focus *,
+[data-testid="stFileUploader"] button:active * {
+    color: #17345f !important;
+    fill: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
+}
+
+/* Uploaded file container */
+[data-testid="stFileUploaderFile"] {
+    background: #ffffff !important;
+    border: 1px solid #b7c9e3 !important;
+    border-radius: 9px !important;
+    padding: 8px !important;
     opacity: 1 !important;
 }
 
-/* Metric cards */
+/* Uploaded filename and file details */
+[data-testid="stFileUploaderFile"] *,
+[data-testid="stFileUploaderFile"] span,
+[data-testid="stFileUploaderFile"] p,
+[data-testid="stFileUploaderFile"] small,
+[data-testid="stFileUploaderFile"] div {
+    color: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
+    opacity: 1 !important;
+}
+
+/* File icon */
+[data-testid="stFileUploaderFile"] svg {
+    color: #2563eb !important;
+    fill: #2563eb !important;
+    opacity: 1 !important;
+}
+
+/* Remove/clear uploaded file control */
+[data-testid="stFileUploaderFile"] button {
+    background: #f1f5f9 !important;
+    color: #17345f !important;
+    border: 1px solid #cbd5e1 !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stFileUploaderFile"] button *,
+[data-testid="stFileUploaderFile"] button svg {
+    color: #17345f !important;
+    fill: #17345f !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stFileUploaderFile"] button:hover {
+    background: #dce9ff !important;
+    border-color: #2563eb !important;
+}
+
+/* Disabled uploader buttons */
+[data-testid="stFileUploader"] button:disabled {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    -webkit-text-fill-color: #475569 !important;
+    opacity: 1 !important;
+}
+
+/* ==================================================
+   METRIC CARDS
+   ================================================== */
+
 .metric-card {
     background: #ffffff;
     border: 1px solid #d6e2f3;
@@ -197,7 +274,10 @@ st.markdown("""
     font-size: 13px;
 }
 
-/* Primary Analyse button */
+/* ==================================================
+   PRIMARY ANALYSE BUTTON
+   ================================================== */
+
 .stButton button[kind="primary"] {
     background: #2563eb !important;
     border: 1px solid #2563eb !important;
@@ -215,7 +295,10 @@ st.markdown("""
     -webkit-text-fill-color: #ffffff !important;
 }
 
-/* DOWNLOAD REPORT BUTTON — FIXED ALL STATES */
+/* ==================================================
+   DOWNLOAD REPORT BUTTON - ALL STATES
+   ================================================== */
+
 [data-testid="stDownloadButton"] button,
 .stDownloadButton button {
     background: #e8effb !important;
@@ -226,17 +309,20 @@ st.markdown("""
     opacity: 1 !important;
     box-shadow: none !important;
     transition: background-color 0.15s ease,
-                border-color 0.15s ease;
+                border-color 0.15s ease !important;
 }
 
 [data-testid="stDownloadButton"] button *,
-.stDownloadButton button * {
+.stDownloadButton button *,
+[data-testid="stDownloadButton"] button svg,
+.stDownloadButton button svg {
     color: #17345f !important;
     fill: #17345f !important;
     -webkit-text-fill-color: #17345f !important;
     opacity: 1 !important;
 }
 
+/* Download button hover/focus/click */
 [data-testid="stDownloadButton"] button:hover,
 [data-testid="stDownloadButton"] button:focus,
 [data-testid="stDownloadButton"] button:focus-visible,
@@ -273,6 +359,15 @@ st.markdown("""
     border-radius: 10px;
 }
 
+/* Progress indicators */
+[data-testid="stProgress"] > div {
+    background: #dbeafe !important;
+}
+
+[data-testid="stProgress"] [role="progressbar"] {
+    background: #2563eb !important;
+}
+
 /* Mobile layout */
 @media (max-width: 768px) {
     .main .block-container {
@@ -281,6 +376,14 @@ st.markdown("""
 
     .hero {
         padding: 20px;
+    }
+
+    .metric-card {
+        padding: 12px;
+    }
+
+    .metric-value {
+        font-size: 24px;
     }
 }
 </style>
@@ -524,7 +627,8 @@ with left:
         help=(
             "Text-based PDFs work best. "
             "Scanned image-only PDFs may need OCR."
-        )
+        ),
+        key="resumeiq_pdf_uploader"
     )
 
     job_title = st.text_input(
