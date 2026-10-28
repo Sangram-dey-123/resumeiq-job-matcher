@@ -94,44 +94,86 @@ st.markdown("""
     opacity: 1 !important;
 }
 
-/* File uploader container */
+/* ==================================================
+   FILE UPLOADER
+   Fix uploaded resume filename and file-size visibility
+   ================================================== */
+
+/* Main upload container */
 [data-testid="stFileUploader"] section {
     background: #ffffff !important;
     border: 1px dashed #94a9c7 !important;
+    border-radius: 9px !important;
 }
 
-/* Keep all file uploader text readable */
-[data-testid="stFileUploader"] section * {
+/* Default uploader text */
+[data-testid="stFileUploader"] section {
     color: #172033 !important;
 }
 
-/* Upload button remains visible without hovering */
+/* Uploaded file details container */
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] {
+    background: #f8fafc !important;
+    color: #111827 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+}
+
+/* Filename, file size, and other file-detail text */
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] *,
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] span,
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] small,
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] p,
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] div {
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827 !important;
+    opacity: 1 !important;
+}
+
+/* Uploaded file icons */
+[data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] svg {
+    color: #374151 !important;
+    fill: #374151 !important;
+    opacity: 1 !important;
+}
+
+/* Upload button: readable before hovering */
 [data-testid="stFileUploader"] button {
     background: #ffffff !important;
     color: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
     border: 1px solid #8ba6cc !important;
     border-radius: 8px !important;
     opacity: 1 !important;
     box-shadow: none !important;
 }
 
-[data-testid="stFileUploader"] button,
 [data-testid="stFileUploader"] button * {
     color: #17345f !important;
     fill: #17345f !important;
     -webkit-text-fill-color: #17345f !important;
+    opacity: 1 !important;
 }
 
+/* Upload button hover and focus */
 [data-testid="stFileUploader"] button:hover,
-[data-testid="stFileUploader"] button:focus-visible {
+[data-testid="stFileUploader"] button:focus,
+[data-testid="stFileUploader"] button:focus-visible,
+[data-testid="stFileUploader"] button:active {
     background: #dce9ff !important;
     color: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
     border-color: #2563eb !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
 }
 
+/* Disabled upload button */
 [data-testid="stFileUploader"] button:disabled {
     background: #f1f5f9 !important;
     color: #475569 !important;
+    -webkit-text-fill-color: #475569 !important;
     opacity: 1 !important;
 }
 
@@ -202,10 +244,13 @@ st.markdown("""
     border: 1px solid #2563eb !important;
     border-radius: 9px !important;
     color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    opacity: 1 !important;
 }
 
 .stButton button[kind="primary"] * {
     color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 /* DOWNLOAD REPORT BUTTON - READABLE IN ALL STATES */
