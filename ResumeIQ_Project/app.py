@@ -401,7 +401,7 @@ if "results" in st.session_state:
     st.write(f"**Keyword overlap:** {results['keyword_score']}%")
     st.progress(results["keyword_score"] / 100)
 
-        col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("### ✅ Matching skills")
