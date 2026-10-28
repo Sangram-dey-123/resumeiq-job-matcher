@@ -15,26 +15,40 @@ st.set_page_config(
 # ---------- DESIGN ----------
 st.markdown("""
 <style>
+/* Main page */
 .stApp {
-    background: linear-gradient(135deg, #f4f7ff 0%, #edf4ff 100%);
+    background: #f3f6fc !important;
     color: #172033 !important;
 }
 
 .main .block-container {
-    max-width: 1150px;
+    max-width: 1200px;
     padding-top: 2rem;
     padding-bottom: 3rem;
 }
 
-/* Readable headings and text */
-.stMarkdown h1,
-.stMarkdown h2,
-.stMarkdown h3,
-.stMarkdown h4,
-.stMarkdown p,
-.stMarkdown li,
-.stMarkdown label {
+/* Main page typography */
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp p,
+.stApp li,
+.stApp label {
+    color: #172033;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: #e8effb !important;
+}
+
+[data-testid="stSidebar"] * {
     color: #172033 !important;
+}
+
+[data-testid="stSidebar"] hr {
+    border-color: #c5d2e6 !important;
 }
 
 /* Header banner */
@@ -52,8 +66,43 @@ st.markdown("""
 }
 
 .hero p {
-    color: #edf3ff !important;
+    color: #ffffff !important;
     font-size: 17px;
+}
+
+/* Input labels */
+[data-testid="stFileUploader"] label,
+[data-testid="stTextInput"] label,
+[data-testid="stTextArea"] label {
+    color: #172033 !important;
+    font-weight: 600 !important;
+}
+
+/* Text input and job description */
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea {
+    background: #ffffff !important;
+    color: #172033 !important;
+    border: 1px solid #aebed4 !important;
+    border-radius: 9px !important;
+    -webkit-text-fill-color: #172033 !important;
+}
+
+[data-testid="stTextInput"] input::placeholder,
+[data-testid="stTextArea"] textarea::placeholder {
+    color: #64748b !important;
+    -webkit-text-fill-color: #64748b !important;
+    opacity: 1 !important;
+}
+
+/* File uploader */
+[data-testid="stFileUploader"] section {
+    background: #ffffff !important;
+    border: 1px dashed #94a9c7 !important;
+}
+
+[data-testid="stFileUploader"] section * {
+    color: #172033 !important;
 }
 
 /* Metric cards */
@@ -86,13 +135,7 @@ st.markdown("""
     font-weight: 600;
 }
 
-/* Force readable text inside skill cards */
-.skill-match,
-.skill-match * {
-    color: #166534 !important;
-}
-
-/* Missing skills */
+/* Potential skill gaps */
 .skill-gap {
     background: #fee2e2;
     color: #991b1b !important;
@@ -103,12 +146,7 @@ st.markdown("""
     font-weight: 600;
 }
 
-.skill-gap,
-.skill-gap * {
-    color: #991b1b !important;
-}
-
-/* Information card */
+/* Information cards */
 .section-card {
     background: #ffffff;
     color: #172033 !important;
@@ -126,6 +164,35 @@ st.markdown("""
 .small-note {
     color: #475569 !important;
     font-size: 13px;
+}
+
+/* Primary buttons */
+.stButton button[kind="primary"] {
+    background: #2563eb !important;
+    border: 1px solid #2563eb !important;
+    border-radius: 9px !important;
+    color: #ffffff !important;
+}
+
+.stButton button[kind="primary"] * {
+    color: #ffffff !important;
+}
+
+/* Data tables */
+[data-testid="stDataFrame"] {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 1rem;
+    }
+
+    .hero {
+        padding: 20px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -179,8 +246,10 @@ def normalize(text):
 
 def extract_pdf(uploaded_file):
     """Extract text from an uploaded PDF."""
-    data = uploaded_file.getvalue()
-    document = fitz.open(stream=data, filetype="pdf")
+    document = fitz.open(
+        stream=uploaded_file.getvalue(),
+        filetype="pdf"
+    )
 
     try:
         pages = [page.get_text() for page in document]
@@ -190,7 +259,7 @@ def extract_pdf(uploaded_file):
 
 
 def detect_skills(text):
-    """Find recognised skills in the supplied text."""
+    """Identify skills from the predefined skill library."""
     normalized = normalize(text)
     found = {}
 
@@ -211,7 +280,7 @@ def detect_skills(text):
 
 
 def find_keywords(text, limit=12):
-    """Find frequent non-generic words as additional job keywords."""
+    """Find frequent words that may be relevant to the job."""
     stop_words = set("""
         the and for with that this from have has will are was were our
         you your they their them about into using use used required
@@ -220,6 +289,7 @@ def find_keywords(text, limit=12):
         must should would can may all any per etc who what when where
         job description position looking ideal across within support
         including such ensure develop developing build building
+        years year knowledge
     """.split())
 
     words = re.findall(
@@ -255,11 +325,7 @@ def analyse_resume(resume_text, job_text):
 
     resume_words = set(normalize(resume_text).split())
 
-    keywords = [
-        word
-        for word in find_keywords(job_text, 15)
-        if word not in {"years", "year", "knowledge"}
-    ]
+    keywords = find_keywords(job_text, 15)
 
     keyword_matches = [
         word for word in keywords
@@ -305,19 +371,19 @@ def make_report(results, job_title):
         "",
         "MATCHING SKILLS",
         *(
-            [f"- {x}" for x in results["matched"]]
+            [f"- {skill}" for skill in results["matched"]]
             or ["- None detected"]
         ),
         "",
         "SKILLS TO CONSIDER DEVELOPING",
         *(
-            [f"- {x}" for x in results["missing"]]
+            [f"- {skill}" for skill in results["missing"]]
             or ["- No missing listed skills detected"]
         ),
         "",
         "SUGGESTED JOB KEYWORDS",
         *(
-            [f"- {x}" for x in results["keywords"]]
+            [f"- {word}" for word in results["keywords"]]
             or ["- None detected"]
         ),
         "",
@@ -570,7 +636,6 @@ if "results" in st.session_state:
             use_container_width=True,
             hide_index=True
         )
-
     else:
         st.write(
             "No recognised skills found. "
@@ -585,7 +650,6 @@ if "results" in st.session_state:
             "Review these skills and learn or practise the ones "
             "that are genuinely relevant to your career goals:"
         )
-
         st.write(", ".join(results["missing"]))
 
         st.write(
@@ -593,7 +657,6 @@ if "results" in st.session_state:
             "making your relevant experience easier to find in "
             "your resume. Do not add skills you do not have."
         )
-
     else:
         st.write(
             "Check whether your resume provides clear evidence "
