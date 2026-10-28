@@ -17,43 +17,101 @@ st.set_page_config(
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(135deg, #f5f7ff 0%, #eef5ff 100%);
+    background: linear-gradient(135deg, #f4f7ff 0%, #edf4ff 100%);
+    color: #172033 !important;
 }
+
 .main .block-container {
     max-width: 1150px;
     padding-top: 2rem;
     padding-bottom: 3rem;
 }
+
+/* Make headings and normal text readable */
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3,
+.stMarkdown h4,
+.stMarkdown p,
+.stMarkdown li,
+.stMarkdown label {
+    color: #172033 !important;
+}
+
+/* Header banner */
 .hero {
     padding: 28px;
     border-radius: 20px;
-    background: linear-gradient(120deg, #182848, #355c9a);
-    color: white;
+    background: linear-gradient(120deg, #14213d, #2457a7);
+    color: white !important;
     margin-bottom: 24px;
 }
-.hero h1 { color: white; margin-bottom: 8px; }
-.hero p { color: #e6edff; font-size: 17px; }
+
+.hero h1 {
+    color: #ffffff !important;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    color: #edf3ff !important;
+    font-size: 17px;
+}
+
+/* Dashboard metric cards */
 .metric-card {
-    background: white;
-    border: 1px solid #e0e7f5;
+    background: #ffffff;
+    border: 1px solid #d6e2f3;
     padding: 20px;
     border-radius: 15px;
     text-align: center;
 }
+
 .metric-value {
     font-size: 30px;
     font-weight: 750;
-    color: #244a91;
+    color: #1d4ed8 !important;
 }
-.metric-label { color: #526078; }
+
+.metric-label {
+    color: #475569 !important;
+}
+
+/* Matching skills: dark green text */
+.skill-match {
+    background: #dcfce7;
+    color: #166534 !important;
+    border-left: 5px solid #16a34a;
+    padding: 13px 16px;
+    border-radius: 9px;
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+/* Missing skills: dark red text */
+.skill-gap {
+    background: #fee2e2;
+    color: #991b1b !important;
+    border-left: 5px solid #dc2626;
+    padding: 13px 16px;
+    border-radius: 9px;
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+/* Information cards */
 .section-card {
-    background: white;
+    background: #ffffff;
+    color: #172033 !important;
     padding: 20px;
-    border: 1px solid #e0e7f5;
+    border: 1px solid #d6e2f3;
     border-radius: 15px;
     margin-bottom: 14px;
 }
-.small-note { color: #526078; font-size: 13px; }
+
+.small-note {
+    color: #475569 !important;
+    font-size: 13px;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -346,20 +404,26 @@ if "results" in st.session_state:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("### ✅ Matching skills")
-        if results["matched"]:
-            for skill in results["matched"]:
-                st.success(skill)
-        else:
-            st.write("No matching skills were recognised.")
+    st.markdown("### ✅ Matching skills")
+    if results["matched"]:
+        for skill in results["matched"]:
+            st.markdown(
+                f'<div class="skill-match">✓ {skill.title()}</div>',
+                unsafe_allow_html=True
+            )
+    else:
+        st.info("No matching skills were recognised.")
 
     with col2:
-        st.markdown("### 📌 Potential skill gaps")
-        if results["missing"]:
-            for skill in results["missing"]:
-                st.warning(skill)
-        else:
-            st.success("No gaps detected in the recognised skill list.")
+    st.markdown("### 📌 Potential skill gaps")
+    if results["missing"]:
+        for skill in results["missing"]:
+            st.markdown(
+                f'<div class="skill-gap">! {skill.title()}</div>',
+                unsafe_allow_html=True
+            )
+    else:
+        st.success("No gaps detected in the recognised skill list.")
 
     st.markdown("### 🧩 Skill comparison table")
 
