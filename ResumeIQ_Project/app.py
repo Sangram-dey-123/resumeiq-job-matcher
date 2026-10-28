@@ -15,7 +15,6 @@ st.set_page_config(
 # ---------- DESIGN ----------
 st.markdown("""
 <style>
-/* Main page */
 .stApp {
     background: #f3f6fc !important;
     color: #172033 !important;
@@ -27,7 +26,7 @@ st.markdown("""
     padding-bottom: 3rem;
 }
 
-/* Main page typography */
+/* Main page text */
 .stApp h1,
 .stApp h2,
 .stApp h3,
@@ -95,14 +94,45 @@ st.markdown("""
     opacity: 1 !important;
 }
 
-/* File uploader */
+/* File uploader container */
 [data-testid="stFileUploader"] section {
     background: #ffffff !important;
     border: 1px dashed #94a9c7 !important;
 }
 
+/* Keep uploader text readable */
 [data-testid="stFileUploader"] section * {
     color: #172033 !important;
+}
+
+/* FIX: Upload button always visible */
+[data-testid="stFileUploader"] button {
+    background: #ffffff !important;
+    color: #17345f !important;
+    border: 1px solid #8ba6cc !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stFileUploader"] button,
+[data-testid="stFileUploader"] button * {
+    color: #17345f !important;
+    fill: #17345f !important;
+    -webkit-text-fill-color: #17345f !important;
+}
+
+[data-testid="stFileUploader"] button:hover,
+[data-testid="stFileUploader"] button:focus-visible {
+    background: #dce9ff !important;
+    color: #17345f !important;
+    border-color: #2563eb !important;
+}
+
+[data-testid="stFileUploader"] button:disabled {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    opacity: 1 !important;
 }
 
 /* Metric cards */
@@ -324,7 +354,6 @@ def analyse_resume(resume_text, job_text):
         skill_score = 0
 
     resume_words = set(normalize(resume_text).split())
-
     keywords = find_keywords(job_text, 15)
 
     keyword_matches = [
